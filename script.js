@@ -1,18 +1,15 @@
-// Mobile Navigation Toggle
-const mobileMenu = document.getElementById('mobile-menu');
-const navLinks = document.getElementById('nav-links');
+// Smooth scrolling ane basic interactivity mate nu script
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("HV CCTV Website Successfully Loaded!");
 
-mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-// Contact Form Submission Alert
-const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Simple submission feedback
-    alert('Thank you! Your message has been sent successfully. We will contact you soon.');
-    contactForm.reset();
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            document.getElementById(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 });
