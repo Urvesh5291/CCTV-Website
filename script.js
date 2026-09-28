@@ -1,36 +1,63 @@
-// Initial Products Array
+// Complete Camera Models Data (2MP to 16MP for HD, IP, PTZ)
 let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
-    { id: 1, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28258.jpg" },
-    { id: 2, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel", price: "$120.00", img: "28259.jpg" },
-    { id: 3, name: "PTZ Dome Camera 16MP", category: "ptz", resolution: "16 Megapixel", price: "$320.00", img: "28257.jpg" }
+    // HD Cameras (2MP to 16MP)
+    { id: 1, name: "HD Pro Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$45.00", img: "28257.jpg" },
+    { id: 2, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28257.jpg" },
+    { id: 3, name: "HD Pro Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$95.00", img: "28257.jpg" },
+    { id: 4, name: "HD Pro Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$150.00", img: "28257.jpg" },
+
+    // IP Cameras (2MP to 16MP)
+    { id: 5, name: "Smart IP Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg" },
+    { id: 6, name: "Smart IP Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$85.00", img: "28258.jpg" },
+    { id: 7, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$120.00", img: "28258.jpg" },
+    { id: 8, name: "Smart IP Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$190.00", img: "28258.jpg" },
+
+    // PTZ Cameras (2MP to 16MP)
+    { id: 9, name: "PTZ Dome Camera 2MP", category: "ptz", resolution: "2 Megapixel", price: "$110.00", img: "28259.jpg" },
+    { id: 10, name: "PTZ Dome Camera 4MP", category: "ptz", resolution: "4 Megapixel", price: "$145.00", img: "28259.jpg" },
+    { id: 11, name: "PTZ Dome Camera 8MP", category: "ptz", resolution: "8 Megapixel (4K)", price: "$210.00", img: "28259.jpg" },
+    { id: 12, name: "PTZ Dome Camera 16MP", category: "ptz", resolution: "16 Megapixel", price: "$320.00", img: "28259.jpg" }
 ];
 
 let cart = [];
 let orders = JSON.parse(localStorage.getItem('hv_orders')) || [];
 
-function displayCameras(filter = 'all') {
+function selectCategory(categoryKey) {
+    document.getElementById('categories').style.display = 'none';
+    const productSection = document.getElementById('productSection');
+    productSection.style.display = 'block';
+
+    let titleText = "";
+    if(categoryKey === 'hd') titleText = "HD Camera Models (2MP - 16MP)";
+    if(categoryKey === 'ip') titleText = "IP Camera Models (2MP - 16MP)";
+    if(categoryKey === 'ptz') titleText = "PTZ Camera Models (2MP - 16MP)";
+    
+    document.getElementById('categoryTitle').innerText = titleText;
+
     const grid = document.getElementById('productGrid');
     grid.innerHTML = '';
-    const filtered = filter === 'all' ? cameras : cameras.filter(c => c.category === filter);
 
+    const filtered = cameras.filter(c => c.category === categoryKey);
     filtered.forEach(cam => {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
-            <img src="${cam.img || '28259.jpg'}" alt="${cam.name}">
+            <img src="${cam.img}" alt="${cam.name}">
             <h3>${cam.name}</h3>
-            <p>${cam.resolution}</p>
-            <p class="price">${cam.price}</p>
+            <p>Resolution: ${cam.resolution}</p>
+            <p class="price">Price: ${cam.price}</p>
             <button class="btn-primary" onclick="addToCart(${cam.id})">Add to Cart</button>
         `;
         grid.appendChild(card);
     });
+
+    window.location.hash = '#productSection';
 }
 
-function filterCategory(category) {
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    displayCameras(category);
+function backToCategories() {
+    document.getElementById('productSection').style.display = 'none';
+    document.getElementById('categories').style.display = 'block';
+    window.location.hash = '#categories';
 }
 
 function addToCart(id) {
@@ -51,7 +78,7 @@ function updateCartDisplay() {
     
     let html = "";
     let total = 0;
-    cart.forEach((c, index) => {
+    cart.forEach(c => {
         html += `<p>${c.name} - ${c.price}</p>`;
         total += parseFloat(c.price.replace('$', ''));
     });
@@ -72,12 +99,10 @@ function checkoutWhatsApp() {
     });
     orderText += `%0ATotal: $${total.toFixed(2)}`;
 
-    // Save order locally for Owner Hub
     const newOrder = { items: [...cart], total: `$${total.toFixed(2)}`, date: new Date().toLocaleString() };
     orders.push(newOrder);
     localStorage.setItem('hv_orders', JSON.stringify(orders));
 
-    // Redirect to WhatsApp (replace with your WhatsApp number)
     let whatsappUrl = `https://wa.me/919876543210?text=${orderText}`;
     window.open(whatsappUrl, '_blank');
     
@@ -86,7 +111,6 @@ function checkoutWhatsApp() {
     updateCartDisplay();
 }
 
-// Login & Owner Hub Logic
 function openLoginModal() {
     document.getElementById('loginModal').style.display = 'flex';
 }
@@ -132,12 +156,11 @@ function addNewProduct() {
         category: category,
         resolution: res,
         price: price,
-        img: '28259.jpg'
+        img: category === 'hd' ? '28257.jpg' : (category === 'ip' ? '28258.jpg' : '28259.jpg')
     };
 
     cameras.push(newCam);
     localStorage.setItem('hv_cameras', JSON.stringify(cameras));
-    displayCameras();
     alert("New product added successfully!");
     document.getElementById('newTitle').value = '';
     document.getElementById('newRes').value = '';
@@ -153,11 +176,8 @@ function loadAdminOrders() {
     let html = "";
     orders.forEach((ord, i) => {
         html += `<div style="background:#eee; padding:8px; margin:5px 0; border-radius:4px;">
-            <b>Order #${i+1}</b> (${ord.date})<br>
-            Total: <b>${ord.total}</b>
+            <b>Order #${i+1}</b> (${ord.date})<br>Total: <b>${ord.total}</b>
         </div>`;
     });
     listDiv.innerHTML = html;
 }
-
-window.onload = () => displayCameras();
