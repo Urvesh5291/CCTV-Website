@@ -16,7 +16,7 @@
         </div>
         <nav class="nav-menu">
             <a href="#home">Home</a>
-            <a href="#catalog">Catalog</a>
+            <a href="#categories">Categories</a>
             <a href="#cart">Cart (<span id="cartCount">0</span>)</a>
             <a href="#" onclick="openLoginModal()">Login / Owner Hub</a>
         </nav>
@@ -26,19 +26,38 @@
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h2>Advanced CCTV & Security Solutions</h2>
-            <p>Order high-definition HD, IP, and PTZ cameras directly via WhatsApp.</p>
-            <a href="#catalog" class="btn-primary">Explore Catalog</a>
+            <p>Select a category below to explore HD, IP, and PTZ camera models.</p>
+            <a href="#categories" class="btn-primary">Explore Categories</a>
         </div>
     </section>
 
-    <!-- Catalog Section -->
-    <section id="catalog" class="catalog-section">
-        <h2>Our Camera Models</h2>
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterCategory('all')">All</button>
-            <button class="filter-btn" onclick="filterCategory('hd')">HD</button>
-            <button class="filter-btn" onclick="filterCategory('ip')">IP</button>
-            <button class="filter-btn" onclick="filterCategory('ptz')">PTZ</button>
+    <!-- Main 3 Category Options with Photos -->
+    <section id="categories" class="categories-section">
+        <h2>Our Camera Categories</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="selectCategory('hd')">
+                <img src="28257.jpg" alt="HD Cameras">
+                <h3>HD Cameras</h3>
+                <p>2MP to 16MP High Definition Models</p>
+            </div>
+            <div class="category-card" onclick="selectCategory('ip')">
+                <img src="28258.jpg" alt="IP Cameras">
+                <h3>IP Cameras</h3>
+                <p>2MP to 16MP Network Camera Models</p>
+            </div>
+            <div class="category-card" onclick="selectCategory('ptz')">
+                <img src="28259.jpg" alt="PTZ Cameras">
+                <h3>PTZ Cameras</h3>
+                <p>2MP to 16MP Pan-Tilt-Zoom Models</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Products Display Section -->
+    <section id="productSection" class="catalog-section" style="display:none;">
+        <div class="section-header">
+            <h2 id="categoryTitle">Camera Models</h2>
+            <button class="btn-secondary" onclick="backToCategories()">← Back to Categories</button>
         </div>
         <div id="productGrid" class="product-grid"></div>
     </section>
@@ -56,18 +75,17 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeLoginModal()">&times;</span>
             <h3>Owner / Customer Login</h3>
-            <input type="text" id="loginUser" placeholder="Username (owner for admin)" style="width:100%; padding:10px; margin:10px 0;">
+            <input type="text" id="loginUser" placeholder="Username (owner)" style="width:100%; padding:10px; margin:10px 0;">
             <input type="password" id="loginPass" placeholder="Password (admin123)" style="width:100%; padding:10px; margin:10px 0;">
             <button class="btn-primary" onclick="handleLogin()">Login</button>
         </div>
     </div>
 
-    <!-- Owner Hub (Admin Dashboard Modal) -->
+    <!-- Owner Hub Modal -->
     <div id="ownerHubModal" class="modal">
         <div class="modal-content" style="max-width: 700px;">
             <span class="close-btn" onclick="closeOwnerHub()">&times;</span>
             <h2>Owner Hub - Dashboard</h2>
-            
             <div style="margin: 20px 0; text-align: left;">
                 <h3>Add New Camera Product</h3>
                 <input type="text" id="newTitle" placeholder="Camera Name" style="width:100%; padding:8px; margin:5px 0;">
@@ -76,14 +94,13 @@
                     <option value="ip">IP Camera</option>
                     <option value="ptz">PTZ Camera</option>
                 </select>
-                <input type="text" id="newRes" placeholder="Resolution (e.g. 8MP)" style="width:100%; padding:8px; margin:5px 0;">
-                <input type="text" id="newPrice" placeholder="Price (e.g. $120.00)" style="width:100%; padding:8px; margin:5px 0;">
+                <input type="text" id="newRes" placeholder="Resolution (e.g. 16MP)" style="width:100%; padding:8px; margin:5px 0;">
+                <input type="text" id="newPrice" placeholder="Price (e.g. $150.00)" style="width:100%; padding:8px; margin:5px 0;">
                 <button class="btn-primary" onclick="addNewProduct()" style="margin-top:10px;">Add Product</button>
             </div>
-
             <hr style="margin: 20px 0;">
             <div style="text-align: left;">
-                <h3>Live Customer Orders Received</h3>
+                <h3>Live Customer Orders</h3>
                 <div id="adminOrdersList" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">No orders yet.</div>
             </div>
         </div>
@@ -96,4 +113,5 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+                    </html>
+                    
