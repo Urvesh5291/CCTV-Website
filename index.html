@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HV Tech Solutions - CCTV & Security Systems</title>
+    <title>HV Tech Solutions - CCTV Systems</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,38 +25,46 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-content">
-            <h2>Advanced CCTV & Security Solutions</h2>
-            <p>Click any category below to instantly view its camera models and prices.</p>
+            <h2>Advanced Security & CCTV Solutions</h2>
+            <p>Select a category below to explore professional Dome and Bullet cameras.</p>
             <a href="#categories" class="btn-primary">Explore Categories</a>
         </div>
     </section>
 
-    <!-- Main 3 Category Options with Photos -->
+    <!-- Main 4 Category Options with Photos -->
     <section id="categories" class="categories-section">
         <h2>Our Camera Categories</h2>
         <div class="category-grid">
-            <div class="category-card" onclick="toggleCategory('hd')">
-                <img src="28257.jpg" alt="HD Cameras">
-                <h3>HD Cameras</h3>
-                <p>Click to view 2MP to 16MP HD Models</p>
+            <div class="category-card" onclick="selectCategory('hd')">
+                <img src="28257.jpg" alt="HD Camera">
+                <h3>HD Camera</h3>
+                <p>Wired Analog/IP Dome & Bullet Models (2MP - 16MP)</p>
             </div>
-            <div class="category-card" onclick="toggleCategory('ip')">
-                <img src="28258.jpg" alt="IP Cameras">
-                <h3>IP Cameras</h3>
-                <p>Click to view 2MP to 16MP IP Models</p>
+            <div class="category-card" onclick="selectCategory('ip')">
+                <img src="28258.jpg" alt="IP Camera">
+                <h3>IP Camera</h3>
+                <p>Advanced Network Dome & Bullet Models (2MP - 16MP)</p>
             </div>
-            <div class="category-card" onclick="toggleCategory('ptz')">
-                <img src="28259.jpg" alt="PTZ Cameras">
-                <h3>PTZ Cameras</h3>
-                <p>Click to view 2MP to 16MP PTZ Models</p>
+            <div class="category-card" onclick="selectCategory('wifi')">
+                <img src="28259.jpg" alt="WiFi Camera">
+                <h3>WiFi Camera</h3>
+                <p>Wireless Smart Security Models</p>
+            </div>
+            <div class="category-card" onclick="selectCategory('ptz')">
+                <img src="28257.jpg" alt="PTZ Camera">
+                <h3>PTZ Camera</h3>
+                <p>Pan-Tilt-Zoom High Performance Models</p>
             </div>
         </div>
+    </section>
 
-        <!-- Dynamic Inline Models Container -->
-        <div id="dynamicModelsContainer" style="display:none; margin-top: 40px;">
-            <h2 id="activeCategoryTitle" style="color: #004aad; margin-bottom: 20px;"></h2>
-            <div id="productGrid" class="product-grid"></div>
+    <!-- Dynamic Products Display Section -->
+    <section id="productSection" class="catalog-section" style="display:none;">
+        <div class="section-header">
+            <h2 id="categoryTitle">Camera Models</h2>
+            <button class="btn-secondary" onclick="backToCategories()">← Back to Categories</button>
         </div>
+        <div id="productGrid" class="product-grid"></div>
     </section>
 
     <!-- Cart Section -->
@@ -85,14 +93,15 @@
             <h2>Owner Hub - Dashboard</h2>
             <div style="margin: 20px 0; text-align: left;">
                 <h3>Add New Camera Product</h3>
-                <input type="text" id="newTitle" placeholder="Camera Name" style="width:100%; padding:8px; margin:5px 0;">
+                <input type="text" id="newTitle" placeholder="Camera Name (e.g. Bullet 8MP)" style="width:100%; padding:8px; margin:5px 0;">
                 <select id="newCategory" style="width:100%; padding:8px; margin:5px 0;">
                     <option value="hd">HD Camera</option>
                     <option value="ip">IP Camera</option>
+                    <option value="wifi">WiFi Camera</option>
                     <option value="ptz">PTZ Camera</option>
                 </select>
-                <input type="text" id="newRes" placeholder="Resolution (e.g. 16MP)" style="width:100%; padding:8px; margin:5px 0;">
-                <input type="text" id="newPrice" placeholder="Price (e.g. $150.00)" style="width:100%; padding:8px; margin:5px 0;">
+                <input type="text" id="newRes" placeholder="Resolution (e.g. 8MP)" style="width:100%; padding:8px; margin:5px 0;">
+                <input type="text" id="newPrice" placeholder="Price (e.g. $95.00)" style="width:100%; padding:8px; margin:5px 0;">
                 <button class="btn-primary" onclick="addNewProduct()" style="margin-top:10px;">Add Product</button>
             </div>
             <hr style="margin: 20px 0;">
@@ -110,4 +119,5 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+                    </html>
+                    
