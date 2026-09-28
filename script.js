@@ -1,23 +1,20 @@
-// Scroll animation & Interactive elements
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("CCTV Service Website Loaded Successfully with WhatsApp Integration!");
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
 
-    // Intersection Observer for scroll reveal effect on service boxes
-    const serviceBoxes = document.querySelectorAll('.service-box');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            if(name && phone && message) {
+                alert(`Thank you ${name}! Tamaro message malyo chhe. Ame jaldaj tamaro sampark karisu.`);
+                contactForm.reset();
+            } else {
+                alert('Kruba kari badhi details bharo.');
             }
         });
-    }, { threshold: 0.1 });
-
-    serviceBoxes.forEach(box => {
-        box.style.opacity = 0;
-        box.style.transform = 'translateY(20px)';
-        box.style.transition = 'all 0.6s ease-out';
-        observer.observe(box);
-    });
+    }
 });
