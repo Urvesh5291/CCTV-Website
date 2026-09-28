@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HV Tech Solutions - CCTV & Security Services</title>
+    <title>HV Tech Solutions - CCTV & Security Systems</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,9 +16,8 @@
         </div>
         <nav class="nav-menu">
             <a href="#home">Home</a>
-            <a href="#cameras">Cameras</a>
+            <a href="#catalog">Camera Models</a>
             <a href="#services">Services</a>
-            <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
@@ -26,106 +25,73 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-content">
-            <h2>Secure Your Premises with Advanced CCTV Solutions</h2>
-            <p>Smart matching for installation, live preview, instant quotes, and 24/7 reliability.</p>
-            <div class="search-bar-container">
-                <input type="text" id="searchInput" placeholder="Search cameras, services, e.g., HD, PTZ...">
-                <button onclick="handleSearch()" class="btn-primary">Search</button>
-            </div>
+            <h2>Advanced CCTV & Security Solutions</h2>
+            <p>Explore our wide range of HD, IP, and PTZ Cameras ranging from 2MP to 16MP.</p>
+            <a href="#catalog" class="btn-primary">View Catalog</a>
         </div>
     </section>
 
-    <!-- Cameras Section (HD, IP, PTZ) -->
-    <section id="cameras" class="cameras-section">
-        <h2>Our Featured Security Cameras</h2>
-        <div class="camera-grid">
-            <div class="camera-card">
-                <img src="28257.jpg" alt="HD Camera">
-                <h3>HD Security Cameras</h3>
-                <p>Crystal clear 1080p resolution with night vision and robust outdoor build.</p>
-                <button onclick="openBooking('HD Camera')" class="btn-secondary">Book / Get Quote</button>
-            </div>
-            <div class="camera-card">
-                <img src="28258.jpg" alt="IP Camera">
-                <h3>IP Digital Cameras</h3>
-                <p>Advanced network cameras with remote mobile viewing and smart motion alerts.</p>
-                <button onclick="openBooking('IP Camera')" class="btn-secondary">Book / Get Quote</button>
-            </div>
-            <div class="camera-card">
-                <img src="28259.jpg" alt="PTZ Camera">
-                <h3>PTZ Pan-Tilt-Zoom Cameras</h3>
-                <p>360-degree coverage with motorized pan, tilt, and optical zoom capabilities.</p>
-                <button onclick="openBooking('PTZ Camera')" class="btn-secondary">Book / Get Quote</button>
-            </div>
+    <!-- Camera Catalog Section with Dynamic Filtering & Details -->
+    <section id="catalog" class="catalog-section">
+        <h2>Our Camera Models (2MP to 16MP)</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterCategory('all')">All Models</button>
+            <button class="filter-btn" onclick="filterCategory('hd')">HD Cameras</button>
+            <button class="filter-btn" onclick="filterCategory('ip')">IP Cameras</button>
+            <button class="filter-btn" onclick="filterCategory('ptz')">PTZ Cameras</button>
+        </div>
+
+        <div id="productGrid" class="product-grid">
+            <!-- JavaScript dwara dynamic cameras render thase -->
         </div>
     </section>
+
+    <!-- Modal Popup for Camera Details -->
+    <div id="cameraModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Camera Image">
+            <h3 id="modalTitle"></h3>
+            <p id="modalCategory"></p>
+            <p id="modalResolution"></p>
+            <p id="modalDesc"></p>
+            <h4 id="modalPrice"></h4>
+            <button class="btn-primary" onclick="alert('Order inquiry sent successfully!')">Enquire Now</button>
+        </div>
+    </div>
 
     <!-- Services Section -->
     <section id="services" class="services-section">
-        <h2>Our Professional Services</h2>
-        <div class="services-grid">
-            <div class="service-box">
-                <h3>Professional Installation</h3>
-                <p>Seamless setup by expert technicians for homes, offices, and industrial zones.</p>
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <img src="28259.jpg" alt="CCTV Installation">
+                <h3>CCTV Installation</h3>
+                <p>Professional installation for homes and businesses.</p>
             </div>
-            <div class="service-box">
-                <h3>Maintenance & Upgrades</h3>
-                <p>Routine checkups, firmware updates, and system health monitoring.</p>
-            </div>
-            <div class="service-box">
-                <h3>Quick Repair Solutions</h3>
-                <p>Fast troubleshooting for connectivity loss, wiring issues, or camera failure.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq-section">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>Q: How does the CCTV booking process work?</h4>
-                <p>A: Simply choose your preferred camera type, fill out the booking form with your requirements, and our team will connect with you instantly.</p>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>Q: Can I view my cameras remotely on my phone?</h4>
-                <p>A: Yes, all our modern IP and PTZ installations support live mobile streaming and cloud playback apps.</p>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>Q: Do you offer maintenance services after installation?</h4>
-                <p>A: Absolutely! We provide annual maintenance contracts (AMC) and rapid repair support.</p>
+            <div class="card">
+                <img src="28258.jpg" alt="Maintenance & Repair">
+                <h3>Maintenance & Repair</h3>
+                <p>Quick troubleshooting, regular system checks and upgrades.</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
-        <h2>Get in Touch With Us</h2>
-        <form id="contactForm" onsubmit="handleContact(event)">
-            <input type="text" id="contactName" placeholder="Your Name" required>
-            <input type="text" id="contactPhone" placeholder="Phone Number" required>
-            <textarea id="contactMsg" placeholder="Your Requirements or Message" rows="4" required></textarea>
-            <button type="submit" class="btn-primary">Send Message</button>
+        <h2>Contact Us</h2>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="tel" id="phone" placeholder="Mobile Number" required>
+            <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit" class="btn-primary">Submit</button>
         </form>
     </section>
 
-    <!-- Modal Popup for Booking -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBooking()">&times;</span>
-            <h3>Book Service for <span id="selectedService"></span></h3>
-            <form onsubmit="handleModalSubmit(event)">
-                <input type="text" placeholder="Your Full Name" required>
-                <input type="tel" placeholder="Mobile Number" required>
-                <input type="date" required>
-                <button type="submit" class="btn-primary">Confirm Booking</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Footer Section -->
     <footer class="site-footer">
-        <p>&copy; 2026 HV Tech Solutions. All Rights Reserved. Secure, Reliable, Connected.</p>
+        <p>&copy; 2026 HV Tech Solutions. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
