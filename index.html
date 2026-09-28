@@ -26,49 +26,54 @@
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h2>Advanced Security & CCTV Solutions</h2>
-            <p>Explore Wired Dome & Bullet cameras from 2MP to 16MP.</p>
+            <p>Explore complete professional camera ranges from 2MP to 16MP.</p>
             <a href="#categories" class="btn-primary">Explore Categories</a>
         </div>
     </section>
 
-    <!-- Main Categories Section -->
+    <!-- Main Categories Section (4 Options) -->
     <section id="categories" class="categories-section">
         <h2>Our Camera Categories</h2>
         <div class="category-grid">
-            <div class="category-card" onclick="selectMainCategory('wired')">
-                <img src="28257.jpg" alt="Wired Camera">
-                <h3>Wired Camera</h3>
-                <p>Analog & IP Dome & Bullet Models (2MP - 16MP)</p>
+            <div class="category-card" onclick="selectMainCategory('hd')">
+                <img src="28257.jpg" alt="HD Camera">
+                <h3>HD Camera</h3>
+                <p>Analog Dome & Bullet Models (2MP - 16MP)</p>
             </div>
-            <div class="category-card" onclick="selectCategoryDirect('wifi')">
-                <img src="28259.jpg" alt="WiFi Camera">
-                <h3>WiFi Camera</h3>
-                <p>Wireless Smart Security Models</p>
+            <div class="category-card" onclick="selectMainCategory('ip')">
+                <img src="28258.jpg" alt="IP Camera">
+                <h3>IP Camera</h3>
+                <p>Network Dome & Bullet Models (2MP - 16MP)</p>
             </div>
             <div class="category-card" onclick="selectCategoryDirect('ptz')">
                 <img src="28257.jpg" alt="PTZ Camera">
                 <h3>PTZ Camera</h3>
                 <p>Pan-Tilt-Zoom High Performance Models</p>
             </div>
+            <div class="category-card" onclick="selectCategoryDirect('wifi')">
+                <img src="28259.jpg" alt="WiFi Camera">
+                <h3>WiFi Camera</h3>
+                <p>Wireless Smart Security Models</p>
+            </div>
         </div>
     </section>
 
-    <!-- Wired Sub-Categories Section (Dome vs Bullet) -->
-    <section id="wiredSubCategories" class="categories-section" style="display:none;">
+    <!-- Sub-Models Section (Fakt 2 Sub-models for HD & IP) -->
+    <section id="subCategories" class="categories-section" style="display:none;">
         <div class="section-header">
-            <h2>Select Wired Camera Type</h2>
+            <h2 id="subCategoryMainTitle">Select Camera Type</h2>
             <button class="btn-secondary" onclick="resetToMainCategories()">← Back</button>
         </div>
         <div class="category-grid">
-            <div class="category-card" onclick="selectWiredType('dome')">
-                <img src="28257.jpg" alt="Dome Cameras">
-                <h3>1. Analog/IP Dome Cameras</h3>
-                <p>2MP to 16MP Dome Models (Indoor/Outdoor)</p>
+            <div class="category-card" onclick="selectSubModel('dome')">
+                <img src="28257.jpg" alt="Dome Models">
+                <h3>1. Analog & IP Dome Models</h3>
+                <p>2MP to 16MP Dome Cameras (Indoor/Outdoor)</p>
             </div>
-            <div class="category-card" onclick="selectWiredType('bullet')">
-                <img src="28258.jpg" alt="Bullet Cameras">
-                <h3>2. Analog/IP Bullet Cameras</h3>
-                <p>2MP to 16MP Bullet Models (Weatherproof)</p>
+            <div class="category-card" onclick="selectSubModel('bullet')">
+                <img src="28258.jpg" alt="Bullet Models">
+                <h3>2. Analog & IP Bullet Models</h3>
+                <p>2MP to 16MP Bullet Cameras (Weatherproof)</p>
             </div>
         </div>
     </section>
@@ -110,10 +115,10 @@
                 <h3>Add New Camera Product</h3>
                 <input type="text" id="newTitle" placeholder="Camera Name" style="width:100%; padding:8px; margin:5px 0;">
                 <select id="newCategory" style="width:100%; padding:8px; margin:5px 0;">
-                    <option value="dome">Wired Dome Camera</option>
-                    <option value="bullet">Wired Bullet Camera</option>
-                    <option value="wifi">WiFi Camera</option>
+                    <option value="dome">Dome Model</option>
+                    <option value="bullet">Bullet Model</option>
                     <option value="ptz">PTZ Camera</option>
+                    <option value="wifi">WiFi Camera</option>
                 </select>
                 <input type="text" id="newRes" placeholder="Resolution (e.g. 16MP)" style="width:100%; padding:8px; margin:5px 0;">
                 <input type="text" id="newPrice" placeholder="Price (e.g. $150.00)" style="width:100%; padding:8px; margin:5px 0;">
