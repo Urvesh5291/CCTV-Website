@@ -1,49 +1,43 @@
-// Complete Camera Models Data in English (2MP to 16MP)
+// Database containing Dome and Bullet cameras for HD and IP (2MP to 16MP) in English
 let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
-    // HD Cameras
-    { id: 1, name: "HD Pro Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$45.00", img: "28257.jpg" },
-    { id: 2, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28257.jpg" },
-    { id: 3, name: "HD Pro Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$95.00", img: "28257.jpg" },
-    { id: 4, name: "HD Pro Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$150.00", img: "28257.jpg" },
+    // HD Camera Models (Dome & Bullet from 2MP to 16MP)
+    { id: 1, name: "HD Analog Dome Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$40.00", img: "28257.jpg" },
+    { id: 2, name: "HD Analog Bullet Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$55.00", img: "28257.jpg" },
+    { id: 3, name: "HD Pro Dome Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$90.00", img: "28257.jpg" },
+    { id: 4, name: "HD Pro Bullet Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$145.00", img: "28257.jpg" },
 
-    // IP Cameras
-    { id: 5, name: "Smart IP Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg" },
-    { id: 6, name: "Smart IP Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$85.00", img: "28258.jpg" },
-    { id: 7, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$120.00", img: "28258.jpg" },
-    { id: 8, name: "Smart IP Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$190.00", img: "28258.jpg" },
+    // IP Camera Models (Dome & Bullet from 2MP to 16MP)
+    { id: 5, name: "IP Network Dome Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg" },
+    { id: 6, name: "IP Network Bullet Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$80.00", img: "28258.jpg" },
+    { id: 7, name: "IP Smart Dome Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$115.00", img: "28258.jpg" },
+    { id: 8, name: "IP Ultra Bullet Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$185.00", img: "28258.jpg" },
 
-    // PTZ Cameras
-    { id: 9, name: "PTZ Dome Camera 2MP", category: "ptz", resolution: "2 Megapixel", price: "$110.00", img: "28259.jpg" },
-    { id: 10, name: "PTZ Dome Camera 4MP", category: "ptz", resolution: "4 Megapixel", price: "$145.00", img: "28259.jpg" },
-    { id: 11, name: "PTZ Dome Camera 8MP", category: "ptz", resolution: "8 Megapixel (4K)", price: "$210.00", img: "28259.jpg" },
-    { id: 12, name: "PTZ Dome Camera 16MP", category: "ptz", resolution: "16 Megapixel", price: "$320.00", img: "28259.jpg" }
+    // WiFi Camera Models
+    { id: 9, name: "Wireless WiFi Smart Camera 2MP", category: "wifi", resolution: "2 Megapixel", price: "$50.00", img: "28259.jpg" },
+    { id: 10, name: "Wireless WiFi Pan Camera 5MP", category: "wifi", resolution: "5 Megapixel", price: "$75.00", img: "28259.jpg" },
+
+    // PTZ Camera Models
+    { id: 11, name: "PTZ Outdoor Dome Camera 4MP", category: "ptz", resolution: "4 Megapixel", price: "$140.00", img: "28257.jpg" },
+    { id: 12, name: "PTZ Heavy Duty Camera 8MP", category: "ptz", resolution: "8 Megapixel (4K)", price: "$220.00", img: "28257.jpg" }
 ];
 
 let cart = [];
 let orders = JSON.parse(localStorage.getItem('hv_orders')) || [];
-let activeCategory = null;
 
-function toggleCategory(categoryKey) {
-    const container = document.getElementById('dynamicModelsContainer');
-    const title = document.getElementById('activeCategoryTitle');
-    const grid = document.getElementById('productGrid');
-
-    if (activeCategory === categoryKey) {
-        // Toggle off if already open
-        container.style.display = 'none';
-        activeCategory = null;
-        return;
-    }
-
-    activeCategory = categoryKey;
-    container.style.display = 'block';
+function selectCategory(categoryKey) {
+    document.getElementById('categories').style.display = 'none';
+    const productSection = document.getElementById('productSection');
+    productSection.style.display = 'block';
 
     let titleText = "";
-    if(categoryKey === 'hd') titleText = "HD Camera Models (2MP - 16MP)";
-    if(categoryKey === 'ip') titleText = "IP Camera Models (2MP - 16MP)";
-    if(categoryKey === 'ptz') titleText = "PTZ Camera Models (2MP - 16MP)";
+    if(categoryKey === 'hd') titleText = "HD Wired Analog/IP Dome & Bullet Cameras (2MP - 16MP)";
+    if(categoryKey === 'ip') titleText = "IP Network Dome & Bullet Cameras (2MP - 16MP)";
+    if(categoryKey === 'wifi') titleText = "WiFi Wireless Security Cameras";
+    if(categoryKey === 'ptz') titleText = "PTZ High-Speed Cameras";
     
-    title.innerText = titleText;
+    document.getElementById('categoryTitle').innerText = titleText;
+
+    const grid = document.getElementById('productGrid');
     grid.innerHTML = '';
 
     const filtered = cameras.filter(c => c.category === categoryKey);
@@ -60,7 +54,13 @@ function toggleCategory(categoryKey) {
         grid.appendChild(card);
     });
 
-    container.scrollIntoView({ behavior: 'smooth' });
+    window.location.hash = '#productSection';
+}
+
+function backToCategories() {
+    document.getElementById('productSection').style.display = 'none';
+    document.getElementById('categories').style.display = 'block';
+    window.location.hash = '#categories';
 }
 
 function addToCart(id) {
@@ -159,7 +159,7 @@ function addNewProduct() {
         category: category,
         resolution: res,
         price: price,
-        img: category === 'hd' ? '28257.jpg' : (category === 'ip' ? '28258.jpg' : '28259.jpg')
+        img: '28257.jpg'
     };
 
     cameras.push(newCam);
@@ -168,11 +168,6 @@ function addNewProduct() {
     document.getElementById('newTitle').value = '';
     document.getElementById('newRes').value = '';
     document.getElementById('newPrice').value = '';
-    
-    if(activeCategory === category) {
-        toggleCategory(category);
-        toggleCategory(category);
-    }
 }
 
 function loadAdminOrders() {
