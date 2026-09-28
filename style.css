@@ -10,7 +10,6 @@ body {
     color: #333;
 }
 
-/* Header with Borders */
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -49,13 +48,13 @@ body {
     text-decoration: none;
     color: #333;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .nav-menu a:hover {
     color: #004aad;
 }
 
-/* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(0, 74, 173, 0.85), rgba(0, 74, 173, 0.85)), url('28259.jpg') no-repeat center center/cover;
     color: white;
@@ -88,15 +87,11 @@ body {
     background-color: #e06c00;
 }
 
-/* Catalog Section */
-.catalog-section {
+.catalog-section, .cart-section {
     padding: 50px 20px;
     text-align: center;
-}
-
-.catalog-section h2 {
-    color: #004aad;
-    margin-bottom: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .filter-buttons {
@@ -122,8 +117,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
 .product-card {
@@ -131,13 +124,7 @@ body {
     border-radius: 6px;
     padding: 15px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    cursor: pointer;
     text-align: left;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
 }
 
 .product-card img {
@@ -157,9 +144,9 @@ body {
 .product-card .price {
     color: #ff7b00;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Modal Styling */
 .modal {
     display: none;
     position: fixed;
@@ -183,14 +170,6 @@ body {
     position: relative;
 }
 
-.modal-content img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
 .close-btn {
     position: absolute;
     top: 10px;
@@ -199,62 +178,11 @@ body {
     cursor: pointer;
 }
 
-/* Services Section */
-.services-section {
-    padding: 50px 20px;
-    text-align: center;
-    background: #eef2f5;
-}
-
-.service-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.card {
-    background: white;
-    border-radius: 6px;
-    width: 300px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: left;
-}
-
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-/* Contact Section */
-.contact-section {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-#contactForm {
-    max-width: 450px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-#contactForm input, #contactForm textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Footer with Border */
 .site-footer {
     background-color: #222;
     color: white;
     text-align: center;
     padding: 15px;
     border-top: 3px solid #ff7b00;
-}
+    margin-top: 40px;
+    }
