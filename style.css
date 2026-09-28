@@ -97,7 +97,6 @@ body {
     font-weight: bold;
 }
 
-/* Categories Section (4 Options) */
 .categories-section {
     padding: 60px 20px;
     text-align: center;
@@ -113,7 +112,7 @@ body {
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
@@ -152,7 +151,6 @@ body {
     font-size: 13px;
 }
 
-/* Catalog Section */
 .catalog-section, .cart-section {
     padding: 50px 20px;
     text-align: center;
