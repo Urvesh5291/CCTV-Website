@@ -1,16 +1,16 @@
-// Database containing Dome and Bullet cameras for HD and IP (2MP to 16MP) in English
+// Database containing Dome and Bullet cameras from 2MP to 16MP
 let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
-    // HD Camera Models (Dome & Bullet from 2MP to 16MP)
-    { id: 1, name: "HD Analog Dome Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$40.00", img: "28257.jpg" },
-    { id: 2, name: "HD Analog Bullet Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$55.00", img: "28257.jpg" },
-    { id: 3, name: "HD Pro Dome Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$90.00", img: "28257.jpg" },
-    { id: 4, name: "HD Pro Bullet Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$145.00", img: "28257.jpg" },
+    // Dome Cameras (2MP to 16MP)
+    { id: 1, name: "Analog/IP Dome Camera 2MP", category: "dome", resolution: "2 Megapixel", price: "$35.00", img: "28257.jpg" },
+    { id: 2, name: "Analog/IP Dome Camera 4MP", category: "dome", resolution: "4 Megapixel", price: "$50.00", img: "28257.jpg" },
+    { id: 3, name: "Analog/IP Dome Camera 8MP", category: "dome", resolution: "8 Megapixel (4K)", price: "$85.00", img: "28257.jpg" },
+    { id: 4, name: "Analog/IP Dome Camera 16MP", category: "dome", resolution: "16 Megapixel", price: "$135.00", img: "28257.jpg" },
 
-    // IP Camera Models (Dome & Bullet from 2MP to 16MP)
-    { id: 5, name: "IP Network Dome Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg" },
-    { id: 6, name: "IP Network Bullet Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$80.00", img: "28258.jpg" },
-    { id: 7, name: "IP Smart Dome Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$115.00", img: "28258.jpg" },
-    { id: 8, name: "IP Ultra Bullet Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$185.00", img: "28258.jpg" },
+    // Bullet Cameras (2MP to 16MP)
+    { id: 5, name: "Analog/IP Bullet Camera 2MP", category: "bullet", resolution: "2 Megapixel", price: "$40.00", img: "28258.jpg" },
+    { id: 6, name: "Analog/IP Bullet Camera 4MP", category: "bullet", resolution: "4 Megapixel", price: "$55.00", img: "28258.jpg" },
+    { id: 7, name: "Analog/IP Bullet Camera 8MP", category: "bullet", resolution: "8 Megapixel (4K)", price: "$90.00", img: "28258.jpg" },
+    { id: 8, name: "Analog/IP Bullet Camera 16MP", category: "bullet", resolution: "16 Megapixel", price: "$145.00", img: "28258.jpg" },
 
     // WiFi Camera Models
     { id: 9, name: "Wireless WiFi Smart Camera 2MP", category: "wifi", resolution: "2 Megapixel", price: "$50.00", img: "28259.jpg" },
@@ -23,15 +23,44 @@ let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
 
 let cart = [];
 let orders = JSON.parse(localStorage.getItem('hv_orders')) || [];
+let currentNavState = 'main'; // 'main', 'wiredSub', or 'products'
 
-function selectCategory(categoryKey) {
+function resetToMainCategories() {
+    currentNavState = 'main';
+    document.getElementById('categories').style.display = 'block';
+    document.getElementById('wiredSubCategories').style.display = 'none';
+    document.getElementById('productSection').style.display = 'none';
+    window.location.hash = '#categories';
+}
+
+function selectMainCategory(key) {
+    if(key === 'wired') {
+        currentNavState = 'wiredSub';
+        document.getElementById('categories').style.display = 'none';
+        document.getElementById('wiredSubCategories').style.display = 'block';
+        window.location.hash = '#wiredSubCategories';
+    }
+}
+
+function selectWiredType(typeKey) {
+    currentNavState = 'products';
+    document.getElementById('wiredSubCategories').style.display = 'none';
+    showProductGrid(typeKey);
+}
+
+function selectCategoryDirect(categoryKey) {
+    currentNavState = 'products';
     document.getElementById('categories').style.display = 'none';
+    showProductGrid(categoryKey);
+}
+
+function showProductGrid(categoryKey) {
     const productSection = document.getElementById('productSection');
     productSection.style.display = 'block';
 
     let titleText = "";
-    if(categoryKey === 'hd') titleText = "HD Wired Analog/IP Dome & Bullet Cameras (2MP - 16MP)";
-    if(categoryKey === 'ip') titleText = "IP Network Dome & Bullet Cameras (2MP - 16MP)";
+    if(categoryKey === 'dome') titleText = "Analog/IP Dome Cameras (2MP to 16MP)";
+    if(categoryKey === 'bullet') titleText = "Analog/IP Bullet Cameras (2MP to 16MP)";
     if(categoryKey === 'wifi') titleText = "WiFi Wireless Security Cameras";
     if(categoryKey === 'ptz') titleText = "PTZ High-Speed Cameras";
     
@@ -57,10 +86,18 @@ function selectCategory(categoryKey) {
     window.location.hash = '#productSection';
 }
 
-function backToCategories() {
-    document.getElementById('productSection').style.display = 'none';
-    document.getElementById('categories').style.display = 'block';
-    window.location.hash = '#categories';
+function backToPreviousMenu() {
+    if(currentNavState === 'products') {
+        // If coming from product grid, check if it was dome/bullet (wired sub) or wifi/ptz (main)
+        const activeTitle = document.getElementById('categoryTitle').innerText;
+        if(activeTitle.includes('Dome') || activeTitle.includes('Bullet')) {
+            document.getElementById('productSection').style.display = 'none';
+            document.getElementById('wiredSubCategories').style.display = 'block';
+            currentNavState = 'wiredSub';
+        } else {
+            resetToMainCategories();
+        }
+    }
 }
 
 function addToCart(id) {
@@ -159,7 +196,7 @@ function addNewProduct() {
         category: category,
         resolution: res,
         price: price,
-        img: '28257.jpg'
+        img: category === 'dome' ? '28257.jpg' : '28258.jpg'
     };
 
     cameras.push(newCam);
@@ -183,4 +220,4 @@ function loadAdminOrders() {
         </div>`;
     });
     listDiv.innerHTML = html;
-}
+                   }
