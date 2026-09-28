@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCTV Service and Installation</title>
+    <title>HV Tech Solutions - CCTV & Security Services</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Header Section -->
     <header>
-        <div class="container header-container">
+        <div class="container nav-container">
             <div class="logo">
-                <img src="1790089407801.jpg" alt="Company Logo">
-                <span>SecureVision CCTV</span>
+                <h2><i class="fa-solid fa-video"></i> HV Tech Solutions</h2>
             </div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,29 +28,32 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Professional CCTV Installation & Maintenance</h1>
-            <p>Tamara ghar ane office ni suraksha maate best security solutions.</p>
-            <a href="https://wa.me/917203875276?text=Hello,%20Maahe%20CCTV%20service%20mate%20information%20joiye%20chhe." target="_blank" class="whatsapp-btn">WhatsApp par Message Karo</a>
+        <div class="container hero-content">
+            <h1>Secure Your Home & Business</h1>
+            <p>Professional CCTV Installation, Maintenance, and Security Solutions.</p>
+            <a href="#contact" class="btn">Get a Quote</a>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2>Services</h2>
+            <h2 class="section-title">Our Services</h2>
             <div class="service-grid">
-                <div class="service-box">
+                <div class="service-card">
+                    <i class="fa-solid fa-camera-retro"></i>
                     <h3>CCTV Installation</h3>
-                    <p>HD ane IP cameras ni professional installation service.</p>
+                    <p>Expert setup for residential, commercial, and industrial properties.</p>
                 </div>
-                <div class="service-box">
-                    <h3>Maintenance & Repair</h3>
-                    <p>Juna camera thik karva ane regular servicing mate.</p>
+                <div class="service-card">
+                    <i class="fa-solid fa-tools"></i>
+                    <h3>Maintenance</h3>
+                    <p>Regular system health checks, upgrades, and troubleshooting.</p>
                 </div>
-                <div class="service-box">
-                    <h3>Biometric & Security</h3>
-                    <p>Advanced security systems ane biometric devices setup.</p>
+                <div class="service-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Security Systems</h3>
+                    <p>Biometric access control, video door phones, and surveillance.</p>
                 </div>
             </div>
         </div>
@@ -58,35 +61,34 @@
 
     <!-- About Section -->
     <section id="about" class="about">
-        <div class="container">
-            <h2>Amara Vishe</h2>
-            <p>Ame CCTV camera installation ane networking service ma vishwasniya naam chhiye. Tamari suraksha amari prathmikta che.</p>
+        <div class="container about-content">
+            <h2>About HV Tech Solutions</h2>
+            <p>Ame advanced security ane surveillance solutions purara padie chhie. Amari team high-quality CCTV camera installation ane reliable support mate olkhay chhe.</p>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Contact Us</h2>
-            <p>Vaddhu mahiti athva booking mate niche apela number par call karo athva WhatsApp karo:</p>
-            <div class="contact-numbers">
-                <p><strong>1. Harsh:</strong> <a href="tel:7203875276">7203875276</a></p>
-                <p><strong>2. Urvesh:</strong> <a href="tel:9173565466">9173565466</a></p>
-            </div>
-            <br>
-            <a href="https://wa.me/917203875276?text=Hello,%20Maahe%20CCTV%20service%20mate%20information%20joiye%20chhe." target="_blank" class="whatsapp-btn">Chat on WhatsApp</a>
+            <h2 class="section-title">Contact Us</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </div>
     </section>
 
-    <!-- Footer Section (Sarkhi Styling) -->
+    <!-- Footer -->
     <footer>
-        <div class="container footer-content">
-            <div class="logo">
-                <img src="1790089407801.jpg" alt="Company Logo">
-                <span>SecureVision CCTV</span>
-            </div>
-            <p>&copy; 2026 CCTV Service & Installation. All Rights Reserved.</p>
-        </div>
+        <p>&copy; 2026 HV Tech Solutions. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
