@@ -87,7 +87,17 @@ body {
     background-color: #e06c00;
 }
 
-/* Categories Section */
+.btn-secondary {
+    background-color: #004aad;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Categories Section (4 Options) */
 .categories-section {
     padding: 60px 20px;
     text-align: center;
@@ -103,8 +113,8 @@ body {
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
 .category-card {
@@ -125,7 +135,7 @@ body {
 
 .category-card img {
     width: 100%;
-    height: 180px;
+    height: 150px;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 15px;
@@ -133,21 +143,34 @@ body {
 
 .category-card h3 {
     color: #004aad;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 8px;
 }
 
 .category-card p {
     color: #666;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-/* Product Grid inside Categories */
+/* Catalog Section */
+.catalog-section, .cart-section {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    text-align: left;
 }
 
 .product-card {
@@ -155,6 +178,7 @@ body {
     border-radius: 6px;
     padding: 15px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    text-align: left;
 }
 
 .product-card img {
@@ -175,13 +199,6 @@ body {
     color: #ff7b00;
     font-weight: bold;
     margin-bottom: 10px;
-}
-
-.cart-section {
-    padding: 50px 20px;
-    text-align: center;
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
 .modal {
