@@ -5,85 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HV Tech Solutions - CCTV & Security Services</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Header Section -->
     <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <h2><i class="fa-solid fa-video"></i> HV Tech Solutions</h2>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+        <div class="logo-container">
+            <img src="logo.png" alt="HV Tech Logo" class="logo">
+            <h1>HV Tech Solutions</h1>
         </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1>Secure Your Home & Business</h1>
-            <p>Professional CCTV Installation, Maintenance, and Security Solutions.</p>
+        <div class="hero-content">
+            <h2>Secure Your Home & Business</h2>
+            <p>Professional CCTV Installation, Maintenance, and Security Surveillance Solutions.</p>
             <a href="#contact" class="btn">Get a Quote</a>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <i class="fa-solid fa-camera-retro"></i>
-                    <h3>CCTV Installation</h3>
-                    <p>Expert setup for residential, commercial, and industrial properties.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-tools"></i>
-                    <h3>Maintenance</h3>
-                    <p>Regular system health checks, upgrades, and troubleshooting.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Security Systems</h3>
-                    <p>Biometric access control, video door phones, and surveillance.</p>
-                </div>
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <h3>CCTV Installation</h3>
+                <p>Expert setup and wiring for homes, offices, and industrial spaces.</p>
+            </div>
+            <div class="card">
+                <h3>System Maintenance</h3>
+                <p>Regular checkups, repairs, and upgrades to keep your cameras online.</p>
+            </div>
+            <div class="card">
+                <h3>Biometric & Security</h3>
+                <p>Advanced security solutions including biometric access and exit switches.</p>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container about-content">
-            <h2>About HV Tech Solutions</h2>
-            <p>Ame advanced security ane surveillance solutions purara padie chhie. Amari team high-quality CCTV camera installation ane reliable support mate olkhay chhe.</p>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Our Work Gallery</h2>
+        <div class="gallery-grid">
+            <img src="camera1.jpg" alt="CCTV Installation">
+            <img src="camera2.jpg" alt="Technician Working">
+            <img src="camera3.jpg" alt="Surveillance Setup">
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="phone" placeholder="Phone Number" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
+        <h2>Contact Us</h2>
+        <p>Email: contact@hvtechsolutions.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <button id="alertBtn" class="btn">Click to Call</button>
     </section>
 
     <!-- Footer -->
