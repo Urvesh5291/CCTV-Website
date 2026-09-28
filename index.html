@@ -26,7 +26,7 @@
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h2>Advanced CCTV & Security Solutions</h2>
-            <p>Select a category below to explore HD, IP, and PTZ camera models.</p>
+            <p>Click any category below to instantly view its camera models and prices.</p>
             <a href="#categories" class="btn-primary">Explore Categories</a>
         </div>
     </section>
@@ -35,31 +35,28 @@
     <section id="categories" class="categories-section">
         <h2>Our Camera Categories</h2>
         <div class="category-grid">
-            <div class="category-card" onclick="selectCategory('hd')">
+            <div class="category-card" onclick="toggleCategory('hd')">
                 <img src="28257.jpg" alt="HD Cameras">
                 <h3>HD Cameras</h3>
-                <p>2MP to 16MP High Definition Models</p>
+                <p>Click to view 2MP to 16MP HD Models</p>
             </div>
-            <div class="category-card" onclick="selectCategory('ip')">
+            <div class="category-card" onclick="toggleCategory('ip')">
                 <img src="28258.jpg" alt="IP Cameras">
                 <h3>IP Cameras</h3>
-                <p>2MP to 16MP Network Camera Models</p>
+                <p>Click to view 2MP to 16MP IP Models</p>
             </div>
-            <div class="category-card" onclick="selectCategory('ptz')">
+            <div class="category-card" onclick="toggleCategory('ptz')">
                 <img src="28259.jpg" alt="PTZ Cameras">
                 <h3>PTZ Cameras</h3>
-                <p>2MP to 16MP Pan-Tilt-Zoom Models</p>
+                <p>Click to view 2MP to 16MP PTZ Models</p>
             </div>
         </div>
-    </section>
 
-    <!-- Dynamic Products Display Section -->
-    <section id="productSection" class="catalog-section" style="display:none;">
-        <div class="section-header">
-            <h2 id="categoryTitle">Camera Models</h2>
-            <button class="btn-secondary" onclick="backToCategories()">← Back to Categories</button>
+        <!-- Dynamic Inline Models Container -->
+        <div id="dynamicModelsContainer" style="display:none; margin-top: 40px;">
+            <h2 id="activeCategoryTitle" style="color: #004aad; margin-bottom: 20px;"></h2>
+            <div id="productGrid" class="product-grid"></div>
         </div>
-        <div id="productGrid" class="product-grid"></div>
     </section>
 
     <!-- Cart Section -->
@@ -113,5 +110,4 @@
 
     <script src="script.js"></script>
 </body>
-                    </html>
-                    
+</html>
