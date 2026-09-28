@@ -1,18 +1,18 @@
-// Complete Camera Models Data (2MP to 16MP for HD, IP, PTZ)
+// Complete Camera Models Data in English (2MP to 16MP)
 let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
-    // HD Cameras (2MP to 16MP)
+    // HD Cameras
     { id: 1, name: "HD Pro Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$45.00", img: "28257.jpg" },
     { id: 2, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28257.jpg" },
     { id: 3, name: "HD Pro Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$95.00", img: "28257.jpg" },
     { id: 4, name: "HD Pro Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$150.00", img: "28257.jpg" },
 
-    // IP Cameras (2MP to 16MP)
+    // IP Cameras
     { id: 5, name: "Smart IP Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg" },
     { id: 6, name: "Smart IP Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$85.00", img: "28258.jpg" },
     { id: 7, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$120.00", img: "28258.jpg" },
     { id: 8, name: "Smart IP Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$190.00", img: "28258.jpg" },
 
-    // PTZ Cameras (2MP to 16MP)
+    // PTZ Cameras
     { id: 9, name: "PTZ Dome Camera 2MP", category: "ptz", resolution: "2 Megapixel", price: "$110.00", img: "28259.jpg" },
     { id: 10, name: "PTZ Dome Camera 4MP", category: "ptz", resolution: "4 Megapixel", price: "$145.00", img: "28259.jpg" },
     { id: 11, name: "PTZ Dome Camera 8MP", category: "ptz", resolution: "8 Megapixel (4K)", price: "$210.00", img: "28259.jpg" },
@@ -21,20 +21,29 @@ let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
 
 let cart = [];
 let orders = JSON.parse(localStorage.getItem('hv_orders')) || [];
+let activeCategory = null;
 
-function selectCategory(categoryKey) {
-    document.getElementById('categories').style.display = 'none';
-    const productSection = document.getElementById('productSection');
-    productSection.style.display = 'block';
+function toggleCategory(categoryKey) {
+    const container = document.getElementById('dynamicModelsContainer');
+    const title = document.getElementById('activeCategoryTitle');
+    const grid = document.getElementById('productGrid');
+
+    if (activeCategory === categoryKey) {
+        // Toggle off if already open
+        container.style.display = 'none';
+        activeCategory = null;
+        return;
+    }
+
+    activeCategory = categoryKey;
+    container.style.display = 'block';
 
     let titleText = "";
     if(categoryKey === 'hd') titleText = "HD Camera Models (2MP - 16MP)";
     if(categoryKey === 'ip') titleText = "IP Camera Models (2MP - 16MP)";
     if(categoryKey === 'ptz') titleText = "PTZ Camera Models (2MP - 16MP)";
     
-    document.getElementById('categoryTitle').innerText = titleText;
-
-    const grid = document.getElementById('productGrid');
+    title.innerText = titleText;
     grid.innerHTML = '';
 
     const filtered = cameras.filter(c => c.category === categoryKey);
@@ -51,13 +60,7 @@ function selectCategory(categoryKey) {
         grid.appendChild(card);
     });
 
-    window.location.hash = '#productSection';
-}
-
-function backToCategories() {
-    document.getElementById('productSection').style.display = 'none';
-    document.getElementById('categories').style.display = 'block';
-    window.location.hash = '#categories';
+    container.scrollIntoView({ behavior: 'smooth' });
 }
 
 function addToCart(id) {
@@ -165,6 +168,11 @@ function addNewProduct() {
     document.getElementById('newTitle').value = '';
     document.getElementById('newRes').value = '';
     document.getElementById('newPrice').value = '';
+    
+    if(activeCategory === category) {
+        toggleCategory(category);
+        toggleCategory(category);
+    }
 }
 
 function loadAdminOrders() {
