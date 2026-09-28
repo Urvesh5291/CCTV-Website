@@ -1,40 +1,27 @@
-// Database for HD, IP, and PTZ Cameras from 2MP to 16MP in English
-const cameras = [
-    // HD Cameras
-    { id: 1, name: "HD Pro Camera 2MP", category: "hd", resolution: "2 Megapixel", price: "$45.00", img: "28257.jpg", desc: "Crystal clear 2MP resolution with night vision support for home security." },
-    { id: 2, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28258.jpg", desc: "Enhanced clarity 4MP HD camera with weather-resistant build." },
-    { id: 3, name: "HD Pro Camera 8MP", category: "hd", resolution: "8 Megapixel (4K)", price: "$95.00", img: "28259.jpg", desc: "Ultra HD 8MP resolution providing extreme detail for large areas." },
-    { id: 4, name: "HD Pro Camera 16MP", category: "hd", resolution: "16 Megapixel", price: "$150.00", img: "28257.jpg", desc: "Supreme grade 16MP high definition camera for professional surveillance." },
-
-    // IP Cameras
-    { id: 5, name: "Smart IP Camera 2MP", category: "ip", resolution: "2 Megapixel", price: "$60.00", img: "28258.jpg", desc: "Network-ready 2MP IP camera with remote mobile streaming." },
-    { id: 6, name: "Smart IP Camera 4MP", category: "ip", resolution: "4 Megapixel", price: "$85.00", img: "28259.jpg", desc: "Advanced 4MP IP camera with motion detection and cloud storage support." },
-    { id: 7, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel (4K)", price: "$120.00", img: "28257.jpg", desc: "High performance 4K IP security camera with smart AI alerts." },
-    { id: 8, name: "Smart IP Camera 16MP", category: "ip", resolution: "16 Megapixel", price: "$190.00", img: "28258.jpg", desc: "Enterprise-class 16MP IP network camera with supreme bandwidth optimization." },
-
-    // PTZ Cameras
-    { id: 9, name: "PTZ Dome Camera 2MP", category: "ptz", resolution: "2 Megapixel", price: "$110.00", img: "28259.jpg", desc: "Pan-Tilt-Zoom 2MP camera with 360-degree coverage." },
-    { id: 10, name: "PTZ Dome Camera 4MP", category: "ptz", resolution: "4 Megapixel", price: "$145.00", img: "28257.jpg", desc: "Dynamic 4MP PTZ camera with optical zoom capabilities." },
-    { id: 11, name: "PTZ Dome Camera 8MP", category: "ptz", resolution: "8 Megapixel (4K)", price: "$210.00", img: "28258.jpg", desc: "Professional 4K PTZ security camera for broad perimeter tracking." },
-    { id: 12, name: "PTZ Dome Camera 16MP", category: "ptz", resolution: "16 Megapixel", price: "$320.00", img: "28259.jpg", desc: "Ultimate 16MP PTZ tracking system with heavy-duty exterior casing." }
+// Initial Products Array
+let cameras = JSON.parse(localStorage.getItem('hv_cameras')) || [
+    { id: 1, name: "HD Pro Camera 4MP", category: "hd", resolution: "4 Megapixel", price: "$65.00", img: "28258.jpg" },
+    { id: 2, name: "Smart IP Camera 8MP", category: "ip", resolution: "8 Megapixel", price: "$120.00", img: "28259.jpg" },
+    { id: 3, name: "PTZ Dome Camera 16MP", category: "ptz", resolution: "16 Megapixel", price: "$320.00", img: "28257.jpg" }
 ];
 
-// Display products on load
+let cart = [];
+let orders = JSON.parse(localStorage.getItem('hv_orders')) || [];
+
 function displayCameras(filter = 'all') {
     const grid = document.getElementById('productGrid');
     grid.innerHTML = '';
-
     const filtered = filter === 'all' ? cameras : cameras.filter(c => c.category === filter);
 
     filtered.forEach(cam => {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.onclick = () => openModal(cam);
         card.innerHTML = `
-            <img src="${cam.img}" alt="${cam.name}">
+            <img src="${cam.img || '28259.jpg'}" alt="${cam.name}">
             <h3>${cam.name}</h3>
             <p>${cam.resolution}</p>
             <p class="price">${cam.price}</p>
+            <button class="btn-primary" onclick="addToCart(${cam.id})">Add to Cart</button>
         `;
         grid.appendChild(card);
     });
@@ -46,25 +33,131 @@ function filterCategory(category) {
     displayCameras(category);
 }
 
-function openModal(cam) {
-    document.getElementById('modalImg').src = cam.img;
-    document.getElementById('modalTitle').innerText = cam.name;
-    document.getElementById('modalCategory').innerText = "Category: " + cam.category.toUpperCase();
-    document.getElementById('modalResolution').innerText = "Resolution: " + cam.resolution;
-    document.getElementById('modalDesc').innerText = cam.desc;
-    document.getElementById('modalPrice').innerText = "Price: " + cam.price;
-    document.getElementById('cameraModal').style.display = 'flex';
+function addToCart(id) {
+    const item = cameras.find(c => c.id === id);
+    cart.push(item);
+    document.getElementById('cartCount').innerText = cart.length;
+    updateCartDisplay();
 }
 
-function closeModal() {
-    document.getElementById('cameraModal').style.display = 'none';
+function updateCartDisplay() {
+    const cartContainer = document.getElementById('cartItems');
+    const totalContainer = document.getElementById('cartTotal');
+    if(cart.length === 0) {
+        cartContainer.innerHTML = "Your cart is empty.";
+        totalContainer.innerHTML = "";
+        return;
+    }
+    
+    let html = "";
+    let total = 0;
+    cart.forEach((c, index) => {
+        html += `<p>${c.name} - ${c.price}</p>`;
+        total += parseFloat(c.price.replace('$', ''));
+    });
+    cartContainer.innerHTML = html;
+    totalContainer.innerHTML = `Total Amount: $${total.toFixed(2)}`;
 }
 
-function handleSubmit(event) {
-    event.preventDefault();
-    alert("Thank you! Your message has been sent successfully.");
-    document.getElementById('contactForm').reset();
+function checkoutWhatsApp() {
+    if(cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+    }
+    let orderText = "Hello HV Tech Solutions, I want to order:%0A";
+    let total = 0;
+    cart.forEach(c => {
+        orderText += `- ${c.name} (${c.price})%0A`;
+        total += parseFloat(c.price.replace('$', ''));
+    });
+    orderText += `%0ATotal: $${total.toFixed(2)}`;
+
+    // Save order locally for Owner Hub
+    const newOrder = { items: [...cart], total: `$${total.toFixed(2)}`, date: new Date().toLocaleString() };
+    orders.push(newOrder);
+    localStorage.setItem('hv_orders', JSON.stringify(orders));
+
+    // Redirect to WhatsApp (replace with your WhatsApp number)
+    let whatsappUrl = `https://wa.me/919876543210?text=${orderText}`;
+    window.open(whatsappUrl, '_blank');
+    
+    cart = [];
+    document.getElementById('cartCount').innerText = 0;
+    updateCartDisplay();
 }
 
-// Initialize grid on load
+// Login & Owner Hub Logic
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+}
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function handleLogin() {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+
+    if(user === 'owner' && pass === 'admin123') {
+        closeLoginModal();
+        openOwnerHub();
+    } else {
+        alert("Invalid credentials! Use user: owner, pass: admin123");
+    }
+}
+
+function openOwnerHub() {
+    document.getElementById('ownerHubModal').style.display = 'flex';
+    loadAdminOrders();
+}
+
+function closeOwnerHub() {
+    document.getElementById('ownerHubModal').style.display = 'none';
+}
+
+function addNewProduct() {
+    const title = document.getElementById('newTitle').value;
+    const category = document.getElementById('newCategory').value;
+    const res = document.getElementById('newRes').value;
+    const price = document.getElementById('newPrice').value;
+
+    if(!title || !price) {
+        alert("Please enter title and price.");
+        return;
+    }
+
+    const newCam = {
+        id: cameras.length + 1,
+        name: title,
+        category: category,
+        resolution: res,
+        price: price,
+        img: '28259.jpg'
+    };
+
+    cameras.push(newCam);
+    localStorage.setItem('hv_cameras', JSON.stringify(cameras));
+    displayCameras();
+    alert("New product added successfully!");
+    document.getElementById('newTitle').value = '';
+    document.getElementById('newRes').value = '';
+    document.getElementById('newPrice').value = '';
+}
+
+function loadAdminOrders() {
+    const listDiv = document.getElementById('adminOrdersList');
+    if(orders.length === 0) {
+        listDiv.innerHTML = "No orders received yet.";
+        return;
+    }
+    let html = "";
+    orders.forEach((ord, i) => {
+        html += `<div style="background:#eee; padding:8px; margin:5px 0; border-radius:4px;">
+            <b>Order #${i+1}</b> (${ord.date})<br>
+            Total: <b>${ord.total}</b>
+        </div>`;
+    });
+    listDiv.innerHTML = html;
+}
+
 window.onload = () => displayCameras();
